@@ -2,10 +2,10 @@
 
 {% block content %}
 <div class="form-container">
-    <h2><i class="fas fa-file-alt"></i> Новая заявка на обучение</h2>
+    <h2> Новая заявка на обучение</h2>
     <form method="POST" class="app-form">
         <div class="form-group">
-            <label><i class="fas fa-truck"></i> Вид транспорта *</label>
+            <label> Вид транспорта *</label>
             <select name="transport_type" required>
                 <option value="">Выберите транспорт</option>
                 <option value="Автобус">Автобус</option>
@@ -14,12 +14,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label><i class="fas fa-calendar-alt"></i> Желаемая дата начала *</label>
+            <label> Желаемая дата начала *</label>
             <input type="text" name="preferred_date" placeholder="ДД.ММ.ГГГГ" required pattern="\d{2}\.\d{2}\.\d{4}">
             <small class="form-hint">Формат: 01.01.2026</small>
         </div>
         <div class="form-group">
-            <label><i class="fas fa-credit-card"></i> Способ оплаты *</label>
+            <label> Способ оплаты *</label>
             <select name="payment_method" required>
                 <option value="">Выберите способ оплаты</option>
                 <option value="Наличные">Наличные в офисе</option>
@@ -28,7 +28,7 @@
                 <option value="Безналичный расчёт">Безналичный расчёт (юр. лица)</option>
             </select>
         </div>
-        <button type="submit" class="btn-primary btn-block"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
+        <button type="submit" class="btn-primary btn-block"> Отправить заявку</button>
     </form>
 </div>
 {% endblock %}

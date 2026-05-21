@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="admin-header">
-    <h2><i class="fas fa-shield-alt"></i> Панель администратора</h2>
+    <h2> Панель администратора</h2>
     <p>Управление заявками на обучение</p>
 </div>
 
@@ -21,8 +21,8 @@
             <option value="Электробус" {% if transport_filter == 'Электробус' %}selected{% endif %}>Электробус</option>
             <option value="Трамвай" {% if transport_filter == 'Трамвай' %}selected{% endif %}>Трамвай</option>
         </select>
-        <button type="submit" class="btn-secondary"><i class="fas fa-filter"></i> Фильтр</button>
-        <a href="{{ url_for('admin') }}" class="btn-secondary"><i class="fas fa-redo"></i> Сброс</a>
+        <button type="submit" class="btn-secondary"> Фильтр</button>
+        <a href="{{ url_for('admin') }}" class="btn-secondary"> Сброс</a>
     </form>
 </div>
 
@@ -33,15 +33,15 @@
             <div class="admin-card">
                 <div class="admin-card-header">
                     <span class="req-id">Заявка #{{ req.id }}</span>
-                    <span class="req-user"><i class="fas fa-user"></i> {{ req.user.full_name }}</span>
+                    <span class="req-user"> {{ req.user.full_name }}</span>
                     <span class="req-date">{{ req.created_at.strftime('%d.%m.%Y') }}</span>
                 </div>
                 <div class="admin-card-body">
-                    <p><i class="fas fa-truck"></i> Транспорт: <strong>{{ req.transport_type }}</strong></p>
-                    <p><i class="fas fa-calendar"></i> Дата начала: {{ req.preferred_date }}</p>
-                    <p><i class="fas fa-credit-card"></i> Оплата: {{ req.payment_method }}</p>
-                    <p><i class="fas fa-phone"></i> Телефон: {{ req.user.phone }}</p>
-                    <p><i class="fas fa-envelope"></i> Email: {{ req.user.email }}</p>
+                    <p> Транспорт: <strong>{{ req.transport_type }}</strong></p>
+                    <p> Дата начала: {{ req.preferred_date }}</p>
+                    <p>Оплата: {{ req.payment_method }}</p>
+                    <p>Телефон: {{ req.user.phone }}</p>
+                    <p> Email: {{ req.user.email }}</p>
                 </div>
                 <div class="admin-card-footer">
                     <form method="POST" action="{{ url_for('update_status', request_id=req.id) }}" class="status-form">
@@ -50,7 +50,7 @@
                             <option value="Идет обучение" {% if req.status == 'Идет обучение' %}selected{% endif %}>Идет обучение</option>
                             <option value="Обучение завершено" {% if req.status == 'Обучение завершено' %}selected{% endif %}>Обучение завершено</option>
                         </select>
-                        <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Обновить</button>
+                        <button type="submit" class="btn-primary"> Обновить</button>
                     </form>
                 </div>
             </div>
@@ -70,7 +70,7 @@
         {% endif %}
     {% else %}
         <div class="empty-state">
-            <i class="fas fa-folder-open fa-3x"></i>
+            
             <p>Заявок не найдено</p>
         </div>
     {% endif %}

@@ -16,18 +16,18 @@
                 <span>Пассажирам.РФ</span>
             </div>
             <div class="nav-links">
-                <a href="{{ url_for('index') }}"><i class="fas fa-home"></i><span>Главная</span></a>
+                <a href="{{ url_for('index') }}"><span>Главная</span></a>
                 {% if current_user.is_authenticated %}
                     {% if current_user.is_admin %}
-                        <a href="{{ url_for('admin') }}"><i class="fas fa-shield-alt"></i><span>Админ</span></a>
+                        <a href="{{ url_for('admin') }}"><span>Админ</span></a>
                     {% else %}
-                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i><span>Кабинет</span></a>
-                        <a href="{{ url_for('new_request') }}"><i class="fas fa-plus-circle"></i><span>Заявка</span></a>
+                        <a href="{{ url_for('dashboard') }}"><span>Кабинет</span></a>
+                        <a href="{{ url_for('new_request') }}"><span>Заявка</span></a>
                     {% endif %}
-                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i><span>Выход</span></a>
+                    <a href="{{ url_for('logout') }}"><span>Выход</span></a>
                 {% else %}
-                    <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i><span>Вход</span></a>
-                    <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i><span>Регистрация</span></a>
+                    <a href="{{ url_for('login') }}"><span>Вход</span></a>
+                    <a href="{{ url_for('register') }}"><span>Регистрация</span></a>
                 {% endif %}
             </div>
         </nav>

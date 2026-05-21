@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="fas fa-graduation-cap"></i> Добро пожаловать!</h1>
+    <h1> Добро пожаловать!</h1>
     <p>Обучение водителей автобусов, электробусов и трамваев</p>
 </div>
 
@@ -29,17 +29,17 @@
 
 <div class="features-grid">
     <div class="feature-card">
-        <i class="fas fa-bus fa-3x"></i>
+    
         <h3>Автобусы</h3>
         <p>Полный курс подготовки водителей автобусов категории "D"</p>
     </div>
     <div class="feature-card">
-        <i class="fas fa-charging-station fa-3x"></i>
+        
         <h3>Электробусы</h3>
         <p>Обучение управлению современным экологичным транспортом</p>
     </div>
     <div class="feature-card">
-        <i class="fas fa-train fa-3x"></i>
+      
         <h3>Трамваи</h3>
         <p>Квалификация "Водитель трамвая" с нуля</p>
     </div>
@@ -48,7 +48,7 @@
 <div class="cta-section">
     <p>Готовы начать обучение?</p>
     {% if not current_user.is_authenticated %}
-        <a href="{{ url_for('register') }}" class="btn-primary"><i class="fas fa-user-plus"></i> Зарегистрироваться</a>
+        <a href="{{ url_for('register') }}" class="btn-primary"> Зарегистрироваться</a>
     {% else %}
         <a href="{{ url_for('new_request') }}" class="btn-primary"><i class="fas fa-pen-alt"></i> Оставить заявку</a>
     {% endif %}

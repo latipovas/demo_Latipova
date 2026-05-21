@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="dashboard-header">
-    <h2><i class="fas fa-user-circle"></i> Личный кабинет</h2>
+    <h2> Личный кабинет</h2>
     <p>Добро пожаловать, {{ current_user.full_name }}</p>
 </div>
 
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<h3><i class="fas fa-history"></i> История заявок</h3>
+<h3> История заявок</h3>
 <div class="requests-list">
     {% if requests %}
         {% for req in requests %}
@@ -25,26 +25,26 @@
                     <span class="request-status">{{ req.status }}</span>
                 </div>
                 <div class="request-body">
-                    <p><i class="fas fa-truck"></i> Транспорт: <strong>{{ req.transport_type }}</strong></p>
-                    <p><i class="fas fa-calendar-day"></i> Дата начала: <strong>{{ req.preferred_date }}</strong></p>
-                    <p><i class="fas fa-credit-card"></i> Оплата: <strong>{{ req.payment_method }}</strong></p>
-                    <p><i class="fas fa-clock"></i> Создана: {{ req.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+                    <p> Транспорт: <strong>{{ req.transport_type }}</strong></p>
+                    <p> Дата начала: <strong>{{ req.preferred_date }}</strong></p>
+                    <p> Оплата: <strong>{{ req.payment_method }}</strong></p>
+                    <p> Создана: {{ req.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
                 </div>
                 <div class="request-footer">
                     {% if req.status == 'Обучение завершено' %}
                         {% if req.id in reviews %}
                             <div class="review-display">
-                                <i class="fas fa-star"></i>
+                                
                                 <span>Ваш отзыв: "{{ reviews[req.id] }}"</span>
                             </div>
                         {% else %}
                             <form method="POST" action="{{ url_for('submit_review', request_id=req.id) }}" class="review-form">
                                 <textarea name="review_text" placeholder="Оставьте отзыв о курсе..." required></textarea>
-                                <button type="submit" class="btn-secondary"><i class="fas fa-paper-plane"></i> Отправить отзыв</button>
+                                <button type="submit" class="btn-secondary"> Отправить отзыв</button>
                             </form>
                         {% endif %}
                     {% else %}
-                        <div class="review-disabled"><i class="fas fa-lock"></i> Отзыв доступен после завершения обучения</div>
+                        <div class="review-disabled"> Отзыв доступен после завершения обучения</div>
                     {% endif %}
                 </div>
             </div>
