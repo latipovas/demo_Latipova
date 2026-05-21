@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2> Новая заявка на обучение</h2>
+    <form method="POST" class="app-form">
+        <div class="form-group">
+            <label> Вид транспорта *</label>
+            <select name="transport_type" required>
+                <option value="">Выберите транспорт</option>
+                <option value="Автобус">Автобус</option>
+                <option value="Электробус">Электробус</option>
+                <option value="Трамвай">Трамвай</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label> Желаемая дата начала *</label>
+            <input type="text" name="preferred_date" placeholder="ДД.ММ.ГГГГ" required pattern="\d{2}\.\d{2}\.\d{4}">
+            <small class="form-hint">Формат: 01.01.2026</small>
+        </div>
+        <div class="form-group">
+            <label> Способ оплаты *</label>
+            <select name="payment_method" required>
+                <option value="">Выберите способ оплаты</option>
+                <option value="Наличные">Наличные в офисе</option>
+                <option value="Банковская карта онлайн">Банковская карта онлайн</option>
+                <option value="Рассрочка">Рассрочка</option>
+                <option value="Безналичный расчёт">Безналичный расчёт (юр. лица)</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary btn-block"> Отправить заявку</button>
+    </form>
+</div>
+{% endblock %}

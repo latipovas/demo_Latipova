@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1> Добро пожаловать!</h1>
+    <p>Обучение водителей автобусов, электробусов и трамваев</p>
+</div>
+
+<!-- Слайдер -->
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide active">
+            <img src="{{ url_for('static', filename='images/slide1.jpg') }}" alt="Обучение автобус">
+            <div class="slide-caption">Профессиональное обучение водителей автобусов</div>
+        </div>
+        <div class="slide">
+            <img src="{{ url_for('static', filename='images/slide3.jpg') }}" alt="Электробусы">
+            <div class="slide-caption">Современные электробусы — экологичный транспорт</div>
+        </div>
+        <div class="slide">
+            <img src="{{ url_for('static', filename='images/slide4.jpg') }}" alt="Трамваи">
+            <div class="slide-caption">Классика городского транспорта — трамваи</div>
+        </div>
+    </div>
+    <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+    <div class="slider-dots"></div>
+</div>
+
+<div class="features-grid">
+    <div class="feature-card">
+    
+        <h3>Автобусы</h3>
+        <p>Полный курс подготовки водителей автобусов категории "D"</p>
+    </div>
+    <div class="feature-card">
+        
+        <h3>Электробусы</h3>
+        <p>Обучение управлению современным экологичным транспортом</p>
+    </div>
+    <div class="feature-card">
+      
+        <h3>Трамваи</h3>
+        <p>Квалификация "Водитель трамвая" с нуля</p>
+    </div>
+</div>
+
+<div class="cta-section">
+    <p>Готовы начать обучение?</p>
+    {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('register') }}" class="btn-primary"> Зарегистрироваться</a>
+    {% else %}
+        <a href="{{ url_for('new_request') }}" class="btn-primary"><i class="fas fa-pen-alt"></i> Оставить заявку</a>
+    {% endif %}
+</div>
+{% endblock %}
