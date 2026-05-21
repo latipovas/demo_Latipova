@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2> Личный кабинет</h2>
+    <p>Добро пожаловать, {{ current_user.full_name }}</p>
+</div>
+
+ <!-- Слайдер -->
+<div class="mini-slider-container">
+    <div class="mini-slider">
+        <div class="mini-slide active"><img src="{{ url_for('static', filename='images/slide1.jpg') }}" alt="Обучение"></div>
+        <div class="mini-slide"><img src="{{ url_for('static', filename='images/slide3.jpg') }}" alt="Электробусы"></div>
+        <div class="mini-slide"><img src="{{ url_for('static', filename='images/slide4.jpg') }}" alt="Трамваи"></div>
+    </div>
+</div>
+
+<h3> История заявок</h3>
+<div class="requests-list">
+    {% if requests %}
+        {% for req in requests %}
+            <div class="request-card status-{{ req.status|lower|replace(' ', '-') }}">
+                <div class="request-header">
+                    <span class="request-id">Заявка #{{ req.id }}</span>
+                    <span class="request-status">{{ req.status }}</span>
+                </div>
+                <div class="request-body">
+                    <p> Транспорт: <strong>{{ req.transport_type }}</strong></p>
+                    <p> Дата начала: <strong>{{ req.preferred_date }}</strong></p>
+                    <p> Оплата: <strong>{{ req.payment_method }}</strong></p>
+                    <p> Создана: {{ req.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+                </div>
+                <div class="request-footer">
+                    {% if req.status == 'Обучение завершено' %}
+                        {% if req.id in reviews %}
+                            <div class="review-display">
+                                
+                                <span>Ваш отзыв: "{{ reviews[req.id] }}"</span>
+                            </div>
+                        {% else %}
+                            <form method="POST" action="{{ url_for('submit_review', request_id=req.id) }}" class="review-form">
+                                <textarea name="review_text" placeholder="Оставьте отзыв о курсе..." required></textarea>
+                                <button type="submit" class="btn-secondary"> Отправить отзыв</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <div class="review-disabled"> Отзыв доступен после завершения обучения</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <i class="fas fa-inbox fa-3x"></i>
+            <p>У вас пока нет заявок</p>
+            <a href="{{ url_for('new_request') }}" class="btn-primary">Создать заявку</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

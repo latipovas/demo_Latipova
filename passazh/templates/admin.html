@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-header">
+    <h2> Панель администратора</h2>
+    <p>Управление заявками на обучение</p>
+</div>
+
+
+<div class="admin-filters">
+    <form method="GET" class="filter-form">
+        <select name="status">
+            <option value="">Все статусы</option>
+            <option value="Новая" {% if status_filter == 'Новая' %}selected{% endif %}>Новая</option>
+            <option value="Идет обучение" {% if status_filter == 'Идет обучение' %}selected{% endif %}>Идет обучение</option>
+            <option value="Обучение завершено" {% if status_filter == 'Обучение завершено' %}selected{% endif %}>Обучение завершено</option>
+        </select>
+        <select name="transport">
+            <option value="">Все типы</option>
+            <option value="Автобус" {% if transport_filter == 'Автобус' %}selected{% endif %}>Автобус</option>
+            <option value="Электробус" {% if transport_filter == 'Электробус' %}selected{% endif %}>Электробус</option>
+            <option value="Трамвай" {% if transport_filter == 'Трамвай' %}selected{% endif %}>Трамвай</option>
+        </select>
+        <button type="submit" class="btn-secondary"> Фильтр</button>
+        <a href="{{ url_for('admin') }}" class="btn-secondary"> Сброс</a>
+    </form>
+</div>
+
+
+<div class="admin-requests">
+    {% if requests %}
+        {% for req in requests %}
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="req-id">Заявка #{{ req.id }}</span>
+                    <span class="req-user"> {{ req.user.full_name }}</span>
+                    <span class="req-date">{{ req.created_at.strftime('%d.%m.%Y') }}</span>
+                </div>
+                <div class="admin-card-body">
+                    <p> Транспорт: <strong>{{ req.transport_type }}</strong></p>
+                    <p> Дата начала: {{ req.preferred_date }}</p>
+                    <p>Оплата: {{ req.payment_method }}</p>
+                    <p>Телефон: {{ req.user.phone }}</p>
+                    <p> Email: {{ req.user.email }}</p>
+                </div>
+                <div class="admin-card-footer">
+                    <form method="POST" action="{{ url_for('update_status', request_id=req.id) }}" class="status-form">
+                        <select name="status">
+                            <option value="Новая" {% if req.status == 'Новая' %}selected{% endif %}>Новая</option>
+                            <option value="Идет обучение" {% if req.status == 'Идет обучение' %}selected{% endif %}>Идет обучение</option>
+                            <option value="Обучение завершено" {% if req.status == 'Обучение завершено' %}selected{% endif %}>Обучение завершено</option>
+                        </select>
+                        <button type="submit" class="btn-primary"> Обновить</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        
+
+        {% if pagination.pages > 1 %}
+        <div class="pagination">
+            {% if pagination.has_prev %}
+                <a href="{{ url_for('admin', page=pagination.prev_num, status=status_filter, transport=transport_filter) }}">&laquo; Назад</a>
+            {% endif %}
+            <span>Страница {{ pagination.page }} из {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+                <a href="{{ url_for('admin', page=pagination.next_num, status=status_filter, transport=transport_filter) }}">Вперед &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    {% else %}
+        <div class="empty-state">
+            
+            <p>Заявок не найдено</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
